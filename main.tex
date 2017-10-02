@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
 %%%% packages and definitions (optional)
 \usepackage{graphicx} % allows inclusion of graphics
@@ -37,10 +37,9 @@
 	
 \makeglossaries
 
-\title{Synergistic Spent Nuclear Fuel Dynamics Within the European Union}
-\author{Jin Whan Bae, Kathryn Huff, Clifford Singer}
+\title{Probabilistic Risk Assessment of Mined Nuclear Spent Fuel Repositories }
+\author{Jin Whan Bae}
 \affil{Dept. of Nuclear, Plasma, and Radiological Engineering, University of Illinois at Urbana-Champaign
-	
 		  Urbana, IL}
 \date{}                     %% if you don't need date to appear
 \setcounter{Maxaffil}{0}
@@ -50,18 +49,30 @@
 
 \begin{document}
 \maketitle
-	
-\input{introduction}
-\input{scenario_specifications}
-\input{future}
-\input{results}
-\input{discussion}
 
-\bibliographystyle{unsrtnat}
-\bibliography{bibliography}
+\section{Abstract}
+\gls{UNF} repositories, given the high decay heat and radioactivity
+of \glspl{UNF}, requires careful engineering. The current plan is
+to design a repository that would contain the material for one million years.
+Considering various events (failures) can occur in that time range,
+the \gls{UNF} repository proposes an interesting subject for
+\gls{PRA}. In this report, the model repository design is after the 
+Yucca Mountain Repository, which is a mined repository in volcanic tuff.
+Ultimate failure status can be defined in various ways, depending on the
+extent of leakage during the one million years (leakage from canister
+\textasciitilde exposure to nearest population). Given the expansive
+time range, very little real data is available, which makes
+most of the probability values a Bayesian, `degree-of-confidence'
+value. Some data can be derived from scientific data, such as 
+corrosion and precipitation in the area, but would have to be extrapolated
+with assumptions for the given time range. The failure scenarios
+would start from the complete placement of the canisters, assuming
+the \gls{UNF} canisters arrived and was placed in the repository
+without fail.
 
-\input{appendix.tex}
 
+%\bibliographystyle{unsrtnat}
+%\bibliography{bibliography}
 
 
 \end{document}
