@@ -10,6 +10,18 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{xspace}
 \usepackage{hhline}
+
+
+\usepackage{pgfgantt}
+\usepackage{rotating}
+\usepackage[graphicx]{realboxes}
+\usepackage{lscape}
+\usepackage[margin=0.5in,landscape]{geometry}
+
+
+\def\pgfcalendarweekdayletter#1{%  
+ \ifcase#1M\or Tu\or W\or Tr\or F\or Sa\or Su\fi%  
+}  
 \usepackage{amsmath}
 
 \usepackage{tabularx}
@@ -57,7 +69,7 @@ to design a repository that would contain the material for one million years.
 Considering various events (failures) can occur in that time range,
 the \gls{UNF} repository proposes an interesting subject for
 \gls{PRA}. In this report, the model repository design is after the 
-Yucca Mountain Repository, which is a mined repository in volcanic tuff.
+\gls{YMR}, which is a mined repository in volcanic tuff.
 Ultimate failure status can be defined in various ways, depending on the
 extent of leakage during the one million years (leakage from canister
 \textasciitilde exposure to nearest population).
@@ -83,9 +95,101 @@ various methods (person carrying it out, precipitation flow etc.)
 to affect the population, causing the system to fail.
 
 
+\section{Goal}
+The goal of this project is to create a simplistic case study of the
+\gls{YMR} with RISKMAN. Various aspects of the repository
+will be modeled in different ways, from empirical failure point probability data,
+distributions with uncertainty, and human failure models.
 
-%\bibliographystyle{unsrtnat}
-%\bibliography{bibliography}
+\section{Schedule}
+\noindent\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[x=.5cm, y=1cm]
+\begin{ganttchart}[
+    hgrid,
+    vgrid,
+    group label font=\Large,
+    progress=today,
+    today=2017-11-10,
+    x unit=6mm,
+    newline shortcut=true,
+    bar label node/.append style={align=right},
+    time slot format=isodate
+    ]{2017-11-10}{2017-12-21}
+    \gantttitlecalendar{year, month=name, day, week=1, weekday=letter} \\
+    
+    \ganttgroup{Extended Abstract}{2017-11-10}{2017-11-23} \\
+    \ganttbar{Literature Review \ganttalignnewline Goal Definition}{2017-11-10}{2017-11-13} \\
+    \ganttbar{Preliminary Analysis}{2017-11-16}{2017-11-23} \\
+
+    
+    \ganttgroup{Building RISKMAN Model}{2017-11-23}{2017-12-01} \\
+    \ganttbar{Identify Top Events}{2017-11-23}{2017-11-25}\\
+    \ganttbar{Construct Event / Fault Tree}{2017-11-25}{2017-11-27} \\
+    \ganttbar{RISKMAN Implementation}{2017-11-27}{2017-12-01} \\
+
+    \ganttgroup{Documentation and Report Write-up}{2017-12-01}{2017-12-10}\\
+    \ganttbar{Document Result}{2017-12-01}{2017-12-10} \\
+    
+    
+
+    
+\end{ganttchart}
+\end{tikzpicture}
+}
+
+
+\section{Background}
+\gls{YMR} has been studied thoroughly in hopes of finally
+disposing the U.S. \gls{UNF} inventory. However, considering
+that it is a large project involving highly radioactive material,
+careful planning and analyses must be done. The reference design
+is taken from various sources \cite{u.s._department_of_energy_office_of_civilian_radioactive_waste_management_national_2008, wilson_total-system_1994, rechard_evolution_2014}.
+The RISKMAN model will attempt to capture various factors in the design.
+
+
+\section{Literature Review}
+System designs of the \gls{YMR} are listed extensively in literature \cite{u.s._department_of_energy_office_of_civilian_radioactive_waste_management_national_2008, wilson_total-system_1994, rechard_evolution_2014}, and contain multiple
+iterations on the design. The basic design is as follows: the spent fuel assemblies
+are repackaged in the waste package canister, and then placed underground,
+underneath a drip shield. The canisters will remain there for up to millions of years,
+surrounded by volcanic tuff.
+
+Some prominent risk factors have also been identified. Volcanic hazards \cite{ho_risk_1992, smith_area_1990}
+have been identified to be a long-term issue. Groundwater movement and transport of 
+radioactive isotopes are another issue, in the case of canister breach \cite{robison_ground-water_1984, quade_fossil_1995}.  Canister reliability is another
+identified risk factor \cite{whipple_can_1996, rutqvist_analysis_2003}.
+
+Different aspects of risk analysis for nuclear waste repositories are published.
+For systems where the future is hardly predictable, bayesian network analyses are 
+suggested in \cite{lee_application_2006}. A method for sensitivity analysis
+to rank important parameters are suggested in \cite{mohanty_cdf_2001}.
+
+
+\section{Method}
+
+From the literature review, a crude diagram of the \gls{YMR} system is drawn.
+From the diagram, important subsystems are identified, with possible initiating
+events that cause them to fail. The subsystems are then linked upon their dependence.
+The initiating events and the related event trees are developed, along with the
+fault tree of the events, if applicable. The probability of basic events or components
+then would be modeled
+appropriately, using various methods like point estimate or distributions.
+The constructed system reliability analysis model then would be implemented to
+RISKMAN, in order to calculate the reliability of the system and identify
+important components or human factors to consider.
+
+
+
+
+
+
+
+
+
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}
 
 
 \end{document}
