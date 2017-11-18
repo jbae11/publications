@@ -10,7 +10,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{xspace}
 \usepackage{hhline}
-
+\usepackage{multirow}
 
 \usepackage{pgfgantt}
 \usepackage{rotating}
@@ -49,7 +49,7 @@
 	
 \makeglossaries
 
-\title{Probabilistic Risk Assessment of Mined Nuclear Spent Fuel Repositories }
+\title{Modeling Methods for Initiating Events in Nuclear Spent Fuel Repositories}
 \author{Jin Whan Bae}
 \affil{Dept. of Nuclear, Plasma, and Radiological Engineering, University of Illinois at Urbana-Champaign
 		  Urbana, IL}
@@ -77,29 +77,21 @@ A definitive exposure of failure criteria must be defined,
 in order for a reasonable analysis.  
 
 Given the expansive
-time range, very little real data is available, which makes
-most of the probability values a Bayesian, a `degree-of-confidence' value.
-Other data can be derived from scientific data, such as 
-corrosion and precipitation in the area, but would have to be extrapolated
-with assumptions for the given time range.
+time range, very little real data is available.
+Major issues or potential failures of the \gls{YMR} include volcanic activity
+and canister failure. The two events have an extremely low
+probability, but have catastrophic consequences. Considering that
+risk is a function of both frequency and severity, the risk 
+of the two factors is significant. 
 
-The failure scenario would begin from the canister's arrival at the
-site, namely, from the repackaging facility. The repackaging facility
-would take out the individual assemblies from the transportation cask
-and emplace the assemblies in a storage cask. There, the storage cask
-would be moved to the repository to sit for a million years. 
-Given the successful emplacement of the fuel canister, the canister
-must corrode, or break, in order to expose the radioactive materials
-inside. The exposed radioactive materials would be transported, through
-various methods (person carrying it out, precipitation flow etc.)
-to affect the population, causing the system to fail.
+This project summarizes literature on methods of modeling
+initiating events of \gls{YMR}. Past research exists on using quantitative
+assessment framework integrating the inference process
+of Bayesian network \cite{lee_application_2006}, modeling
+magma-drift interaction to predict volcanic and repository
+failure events \cite{woods_modeling_2002}, and
+using a homogeneous Poisson process \cite{ho_risk_1992}.
 
-
-\section{Goal}
-The goal of this project is to create a simplistic case study of the
-\gls{YMR} with RISKMAN. Various aspects of the repository
-will be modeled in different ways, from empirical failure point probability data,
-distributions with uncertainty, and human failure models.
 
 \section{Schedule}
 \noindent\resizebox{\textwidth}{!}{
@@ -118,15 +110,13 @@ distributions with uncertainty, and human failure models.
     \gantttitlecalendar{year, month=name, day, week=1, weekday=letter} \\
     
     \ganttgroup{Extended Abstract}{2017-11-10}{2017-11-23} \\
-    \ganttbar{Literature Review \ganttalignnewline Goal Definition}{2017-11-10}{2017-11-13} \\
+    \ganttbar{Literature Curation \ganttalignnewline Goal Definition}{2017-11-10}{2017-11-13} \\
     \ganttbar{Preliminary Analysis}{2017-11-16}{2017-11-23} \\
 
     
-    \ganttgroup{Building RISKMAN Model}{2017-11-23}{2017-12-01} \\
-    \ganttbar{Identify Top Events}{2017-11-23}{2017-11-25}\\
-    \ganttbar{Construct Event / Fault Tree}{2017-11-25}{2017-11-27} \\
-    \ganttbar{RISKMAN Implementation}{2017-11-27}{2017-12-01} \\
-
+    \ganttgroup{Bayesian Network}{2017-11-23}{2017-11-25} \\
+    \ganttgroup{Modeling Physical Phenomena}{2017-11-26}{2017-11-28}\\
+    \ganttgroup{Homogeneous Poisson Process}{2017-11-29}{2017-11-30}\\
     \ganttgroup{Documentation and Report Write-up}{2017-12-01}{2017-12-10}\\
     \ganttbar{Document Result}{2017-12-01}{2017-12-10} \\
     
@@ -143,12 +133,17 @@ distributions with uncertainty, and human failure models.
 disposing the U.S. \gls{UNF} inventory. However, considering
 that it is a large project involving highly radioactive material,
 careful planning and analyses must be done. The reference design
-is taken from various sources \cite{u.s._department_of_energy_office_of_civilian_radioactive_waste_management_national_2008, wilson_total-system_1994, rechard_evolution_2014}.
-The RISKMAN model will attempt to capture various factors in the design.
+is taken from various sources \cite{u.s._department_of_energy_office_of_civilian_radioactive_waste_management_national_2008, wilson_total-system_1994, rechard_evolution_2014, u.s._department_of_energy_yucca_2002}.
+Major sources of risk events are identified along with different ways to model
+the events. 
+
+Among them, certain initiating events are identified to be extremely difficult
+to model using traditional risk analysis models, which calls for different
+ways to model such rare and unpredictable events. 
 
 
 \section{Literature Review}
-System designs of the \gls{YMR} are listed extensively in literature \cite{u.s._department_of_energy_office_of_civilian_radioactive_waste_management_national_2008, wilson_total-system_1994, rechard_evolution_2014}, and contain multiple
+System designs of the \gls{YMR} are listed extensively in literature \cite{u.s._department_of_energy_office_of_civilian_radioactive_waste_management_national_2008, wilson_total-system_1994, rechard_evolution_2014, u.s._department_of_energy_yucca_2002}, and contain multiple
 iterations on the design. The basic design is as follows: the spent fuel assemblies
 are repackaged in the waste package canister, and then placed underground,
 underneath a drip shield. The canisters will remain there for up to millions of years,
@@ -167,24 +162,49 @@ to rank important parameters are suggested in \cite{mohanty_cdf_2001}.
 
 \section{Method}
 
-From the literature review, a crude diagram of the \gls{YMR} system is drawn.
-From the diagram, important subsystems are identified, with possible initiating
-events that cause them to fail. The subsystems are then linked upon their dependence.
-The initiating events and the related event trees are developed, along with the
-fault tree of the events, if applicable. The probability of basic events or components
-then would be modeled
-appropriately, using various methods like point estimate or distributions.
-The constructed system reliability analysis model then would be implemented to
-RISKMAN, in order to calculate the reliability of the system and identify
-important components or human factors to consider.
+For various facilities and aspects of the \gls{YMR}, events that
+cannot be modeled with traditional risk analysis methods are picked.
+Those events are carefully analyzed and defined to find an adequate
+method to model the events. Various literature will be curated for
+reference.
 
+\section{Definition of System Failure}
+The definition of `System Failure' as a whole is tricky, but for this analysis it is defined
+as `Radioactive Material Escape from Container.'
+`Radioactive Material' would namely mean the spent fuel assemblies.
+The container could be the transport cask which transports the assemblies from
+the reactors to the site, or the emplacement cask, which is ultimately put in the repository.
 
+\section{Definition of Initiating Event}
+An initiating event is what causes a cascade of events that eventually leads
+to the system failure, which is defined above as `Radioactive Material Escape
+from Container'. Examples of initiating events are volcanic activity and 
+earthquakes.
 
+\section{System Analysis}
+In order to identify the various initiating events, a thorough system analysis
+is done. Among them, weaker points are emphasized to find the most severe
+initiating event that will affect multiple facilities or components. 
 
+Initiating events have been identified as crucial to the 
+\gls{YMR} system are listed in table \ref{tab:ie}.
 
+\begin{table}[h]
+    \centering
+%   \scalebox{0.86}{
+        \begin{tabular}{ccc}
+            \hline
+            \textbf{Initiating Event} & \textbf{Reason} & \textbf{Difficulty to Model} \\ \hline
+            Volcanic Activity & Repository rupture and Large Heat Influx & Rare event and needs modeling of physical phenomena \\ 
+            Canister Corrodes Away & Leakage of Radioactive material & Modeling corrosion in geological time periods \\
+            Seismic Activity & Repository rupture & Rare event and difficult to predict \\ \hline
+        \end{tabular}
+        \caption{List of initiating events crucial to the failure of the \gls{YMR}}
+        \label{tab:ie}
+\end {table}
+\FloatBarrier
 
-
-
+\FloatBarrier
 
 
 
