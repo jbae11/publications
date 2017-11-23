@@ -17,7 +17,8 @@
 \usepackage[graphicx]{realboxes}
 \usepackage{lscape}
 \usepackage[margin=0.5in,landscape]{geometry}
-
+\usepackage{wrapfig}
+\usepackage{lipsum}
 
 \def\pgfcalendarweekdayletter#1{%  
  \ifcase#1M\or Tu\or W\or Tr\or F\or Sa\or Su\fi%  
@@ -117,9 +118,9 @@ using a homogeneous Poisson process \cite{ho_risk_1992}.
     \ganttbar{Preliminary Analysis}{2017-11-16}{2017-11-23} \\
 
     
-    \ganttgroup{Bayesian Network}{2017-11-23}{2017-11-25} \\
-    \ganttgroup{Modeling Physical Phenomena}{2017-11-26}{2017-11-28}\\
-    \ganttgroup{Homogeneous Poisson Process}{2017-11-29}{2017-11-30}\\
+    \ganttgroup{Volcanic Activity}{2017-11-23}{2017-11-25} \\
+    \ganttgroup{Canister Corrodes Away}{2017-11-26}{2017-11-28}\\
+    \ganttgroup{Seismic Activity}{2017-11-29}{2017-11-30}\\
     \ganttgroup{Documentation and Report Write-up}{2017-12-01}{2017-12-10}\\
     \ganttbar{Document Result}{2017-12-01}{2017-12-10} \\
     
@@ -140,9 +141,15 @@ is taken from various sources \cite{u.s._department_of_energy_office_of_civilian
 Major sources of risk events are identified along with different ways to model
 the events. 
 
-Among them, certain initiating events are identified to be extremely difficult
-to model using traditional risk analysis models, which calls for different
-ways to model such rare and unpredictable events. 
+Many risk events and components can be modeled using traditional methods like
+failure probability from empirical tests and Human Reliability Analysis.
+For simple mechanical procedures, for example, there exists previous data
+on operation and failure probabilities. 
+
+However, certain events are identified to be extremely difficult
+to model using traditional risk analysis models. The events either
+contain geological timescales or unpredictable natural disasters.
+These events call for non-traditional methods of risk analysis.
 
 
 \section{Literature Review}
@@ -165,11 +172,11 @@ to rank important parameters are suggested in \cite{mohanty_cdf_2001}.
 
 \section{Method}
 
-For various facilities and aspects of the \gls{YMR}, events that
+For various facilities and aspects of the \gls{YMR}, imitating events that
 cannot be modeled with traditional risk analysis methods are picked.
 Those events are carefully analyzed and defined to find an adequate
 method to model the events. Various literature will be curated for
-reference.
+reference. Then the analysis methods are carefully evaluated and reviewed.
 
 \section{Definition of System Failure}
 The definition of `System Failure' as a whole is tricky, but for this analysis it is defined
@@ -205,9 +212,173 @@ Initiating events have been identified as crucial to the
         \caption{List of initiating events crucial to the failure of the \gls{YMR}}
         \label{tab:ie}
 \end {table}
-\FloatBarrier
+
+The three initiating events all have very little data
+and cannot have empirical data for modeling. Thus,
+various methods have been used in an attempt to model these events.
+
+\section{Goal}
+The goal of this project is to research a method for effectively
+modeling the three initiating events through literature review.
+Preferably a value judgment will be made on the best method
+for modeling the initiating event. 
 
 \FloatBarrier
+
+
+
+\section{Volcanic Activity}
+Yucca Mountain has been considered a potential site
+for volcanic activity due to its multiple basalt centers 
+of Quaternary age \cite{management_environmental_1986}.
+Many papers \cite{crowe_volcanism:_2006, crowe_status_1995}claim that
+the presence of those volcanic rocks are a result of early volcanic episodes in the region,
+and that a volcanic activity is likely to occur.
+There also is not a recorded volcanism near Yucca Mountain, which required
+detailed volcanologic studies to be done to obtain the history of 
+volcanic activity in the region.
+
+\subsection{Simple Poisson Method}
+The first attempt to calculate the probability of volcanic disruption
+at Yucca Mountain was Crowe and Carr \cite{crowe_preliminary_1980}, using 
+a simple Poisson model:
+\[P_r = exp(-\lambda t p)\]
+\[\lambda = \text{recurrence rate of volcanic events}\]
+\[p = \text{probability of a repository disruption, given a volcanic eruption}\]
+
+This model assumed three things:
+
+\begin{itemize}
+    \item 1. Volcanic eruptions in successive time periods are independent
+     and should follow Poisson distribution with constant mean\\
+    \item 2. Every eruption has the same probability to disrupt the repository \\
+    \item 3. Disruption events are independent \\
+\end{itemize}
+
+This model, using a refined mathematical model, resulted in a 
+probability of volcanic disruption of the repository in the range of 
+3.3e-10 to 4.7e-8 for the first year, with a linear increase with time \cite{crowe_volcanic_1986}.
+
+Though a brave feat, the poisson model was not an adequate model for 
+measuring a complex phenomenon like a volcanic eruption. The reasons
+are the following:
+
+\begin{itemize}
+    \item 1. A simple Poisson model has a constant rate, which should be changing in time. Volcanic
+            activities are considered "waning", "random", and "developing" in time \cite{ho_nonhomogeneous_1991}, meaning
+            that the rate ($\lambda$) changes over time. 
+    \item 2. Clear understanding is needed of eruptive processes and reliable dating techniques.
+\end{itemize}
+
+
+\subsection{Non-homogeneous Poisson Method}
+An improvement from the simple Poisson model was made by using
+non-homogeneous Poisson process with Weibull intensity \cite{ho_risk_1992}.
+This process estimates the instantaneous recurrence rate using the
+non-homogeneous Poisson process with Weibull intensity, and uses 
+a homogeneous Poisson process to predict future eruptions.
+Then, Bayesian analysis is performed to model the repository-disruptive frequency
+given a volcanic eruption. This process replaces the constant $\lambda$ with
+a time-dependent $\lambda(t)$. In the paper \cite{ho_risk_1992}, their choice of 
+$\lambda(t)$ was the following:
+\[ \lambda(t) = (\frac{t}{\theta})^{\beta}\]
+which the first occurrenct follows a Weibull distribution, given by equation:
+\[f(x;\lambda, k) = \frac{k}{\lambda} (\frac{x}{\lambda})^{k-1} for x\geq 0 \]
+
+for different `stages', the $\beta$ holds different values, listed in table \ref{tab:beta}:
+
+\begin{table}[h]
+    \centering
+%   \scalebox{0.86}{
+        \begin{tabular}{cc}
+            \hline
+            \textbf{Volcano} & \textbf{$\beta$} \\ \hline
+            Waning & 0.63 \\
+            Random & 0.99 \\
+            Developing & 5.40 \\
+            \hline
+       \end{tabular}
+        \caption{Beta Values for different stages of volcanic period. If beta is larger than
+                 1, the rate of eruption increases with time.}
+        \label{tab:beta}
+\end {table}
+
+With the new $\lambda$ estimated, that $\lambda$ is plugged into simple Poisson distribution
+(homogeneous Poisson) to calculate recurrence rate ($\lambda(t) t_0 $) for future time $[t, t+t_0]$.
+This non-homogeneous Poisson method with updated eruption rate is to take into account both the 
+specific physical events or processes that cause volcanic eruptions ($\lambda(t)$), and the 
+various factors with random influences (Simple Poisson).
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+\centering
+\caption{This map outlines the are of most recent volcanic activity (dashed line)
+and high-risk zones (rectangles). The dark shape labeled YM is the repository.}
+
+\includegraphics[scale=0.3]{./images/map.png}
+\vspace{-10pt}
+\label{fig:map}
+
+\end{wrapfigure}
+
+
+For the probability of the volcanic eruption disrupting the repository, a map is drawn
+with the area of most recent volcanic activity to identify high-risk zones (Figure \ref{fig:map}).
+The proportion of the repository that is inside the risk zone is then used
+for the upper limit for the probability.
+
+
+The non-homogeneous Poisson method included various physical events and historic eruptions
+into its risk calculation, as well as reflect the randomness of volcanic eruptions.
+This resulted in a 90\% confidence interval for the probability of `site disruption'
+of 0.01 to 0.067 for 10,000 years \cite{ho_risk_1992}.
+
+\subsection{Multiple non-homogeneous Poisson models}
+Connor et al. proposed a three non-homogeneous Poisson model
+to model volcanic activity in Yucca Mountain \cite{connor_three_1995}.
+The three methods are: spatio-temporal nearest neighbor,
+kernel and nearest-neighbor kernel. The combination provides
+the following benefits:
+\begin{itemize}
+    \item Recurrence rate and probability can be mapped \\
+    \item No need to define areas of zones of volcanic activity \\
+    \item Impact of uncertainty in timing and distribution is easy \\
+\end{itemize}
+
+This model incorporates more physical events and geological data 
+in order to construct the three methods. The details of constructing 
+the estimates with geological data (rock age, maps) is beyond the scope
+of this review.
+
+In short, this more detailed model takes into account the 
+clustering of Quaternary volcanoes and the spatial dependency
+or volcanic recurrence. This model resulted in a probability
+of disruption within the 8 square kilometers of the repository
+between 0.0001 and 0.0005 in 10,000 years \cite{connor_three_1995}.
+
+
+\subsection{Discussion}
+The evolution of the methods of predicting volcanic eruption
+and its probability to disrupt the repository was mainly
+the evolution of taking into account various physical phenomenon
+that change over time. Given geological timescales and lack
+of historical data, predictions could only be made from current
+geological formations that hint at a possibility of volcanic formation.
+The reviewed papers progressively added layers and layers of geologic
+and physical contribution to volcanic eruption, to add complexity to
+their models.
+
+Given a detailed geological database of the region and a clear understanding
+of volcanic formation and activity, a Monte Carlo method can be an 
+improvement from these multiple Poisson methods, where the entire
+region can be simulated and tested to see if the repository is disrupted
+in 10,000 years. However, such as feat would cost tremendous resources,
+which would call for estimates and assumptions.  
+
+
+\FloatBarrier
+
+
+\pagebreak
 
 
 
