@@ -12,11 +12,10 @@
 \usepackage{hhline}
 \usepackage{multirow}
 
-\usepackage{pgfgantt}
+\usepackage{varwidth}
+
 \usepackage{rotating}
 \usepackage[graphicx]{realboxes}
-\usepackage{lscape}
-\usepackage[margin=0.5in,landscape]{geometry}
 \usepackage{wrapfig}
 \usepackage{lipsum}
 
@@ -88,48 +87,16 @@ to model the initiating events using non-traditional
 risk analysis methods.
 
 This project summarizes literature on methods of modeling
-initiating events of \gls{YMR}, and identifies
-benefits and limitations of the methods. Past research exists on using quantitative
-assessment framework integrating the inference process
-of Bayesian network \cite{lee_application_2006}, modeling
-magma-drift interaction to predict volcanic and repository
-failure events \cite{woods_modeling_2002}, and
-using a homogeneous Poisson process \cite{ho_risk_1992}.
-
-
-\section{Schedule}
-\noindent\resizebox{\textwidth}{!}{
-\begin{tikzpicture}[x=.5cm, y=1cm]
-\begin{ganttchart}[
-    hgrid,
-    vgrid,
-    group label font=\Large,
-    progress=today,
-    today=2017-11-10,
-    x unit=6mm,
-    newline shortcut=true,
-    bar label node/.append style={align=right},
-    time slot format=isodate
-    ]{2017-11-10}{2017-12-21}
-    \gantttitlecalendar{year, month=name, day, week=1, weekday=letter} \\
-    
-    \ganttgroup{Extended Abstract}{2017-11-10}{2017-11-23} \\
-    \ganttbar{Literature Curation \ganttalignnewline Goal Definition}{2017-11-10}{2017-11-13} \\
-    \ganttbar{Preliminary Analysis}{2017-11-16}{2017-11-23} \\
-
-    
-    \ganttgroup{Volcanic Activity}{2017-11-23}{2017-11-25} \\
-    \ganttgroup{Canister Corrodes Away}{2017-11-26}{2017-11-28}\\
-    \ganttgroup{Seismic Activity}{2017-11-29}{2017-11-30}\\
-    \ganttgroup{Documentation and Report Write-up}{2017-12-01}{2017-12-10}\\
-    \ganttbar{Document Result}{2017-12-01}{2017-12-10} \\
-    
-    
-
-    
-\end{ganttchart}
-\end{tikzpicture}
-}
+three initiating events of \gls{YMR}, and identifies
+benefits and limitations of the methods. To clarify,
+the word `modeling' in this report refers to initiating event
+quantification, not identification.
+Past research exists on 
+modeling magma-drift interaction to predict volcanic and repository
+failure events \cite{woods_modeling_2002},
+using expert interpretation and opinion to measure epistemic
+uncertainty of seismic activity probability \cite{stepp_probabilistic_2001}
+and using a homogeneous Poisson process \cite{ho_risk_1992}.
 
 
 \section{Background}
@@ -172,49 +139,55 @@ to rank important parameters are suggested in \cite{mohanty_cdf_2001}.
 
 \section{Method}
 
-For various facilities and aspects of the \gls{YMR}, imitating events that
-cannot be modeled with traditional risk analysis methods are picked.
-Those events are carefully analyzed and defined to find an adequate
-method to model the events. Various literature will be curated for
-reference. Then the analysis methods are carefully evaluated and reviewed.
+Literature review will be done to study the methods of analyzing the three
+initiating events - volcanic eruption, seismic activity and canister
+corrosion. Studying the previous methods will bring insight into how
+the initiating event works and how it affects the system of
+interest (the repository). With the knowledge, limitations of
+current methods and possible improvements are discussed.
 
 \section{Definition of System Failure}
-The definition of `System Failure' as a whole is tricky, but for this analysis it is defined
-as `Radioactive Material Escape from Container.'
+The definition of system failure depends on the scope of the system.
+If the system is considered to be the entire repository, the `system failure' would be
+`Radioactive Material Escape from Container.'
 `Radioactive Material' would namely mean the spent fuel assemblies.
 The container could be the transport cask which transports the assemblies from
 the reactors to the site, or the emplacement cask, which is ultimately put in the repository.
 
+
 \section{Definition of Initiating Event}
 An initiating event is what causes a cascade of events that eventually leads
 to the system failure, which is defined above as `Radioactive Material Escape
-from Container'. Examples of initiating events are volcanic activity and 
-earthquakes.
+from Container'. 
+
 
 \section{System Analysis}
-In order to identify the various initiating events, a thorough system analysis
-is done. Among them, weaker points are emphasized to find the most severe
-initiating event that will affect multiple facilities or components. 
+To identify the initiating events to do literature review on,
+we looked at various repository analyses and reports \cite{u.s._department_of_energy_office_of_civilian_radioactive_waste_management_national_2008, wilson_total-system_1994, rechard_evolution_2014, u.s._department_of_energy_yucca_2002},
+in which many of them discuss the importance of geology and canister design.
+In the case of the \gls{YMR}, seismic activity, volcanic eruption was considered
+a structural concern. Additionally, like every repository, the integrity
+of the container was a concern as well. Thus, the three events are chosen
+as the object of this literature review.
 
 Initiating events have been identified as crucial to the 
 \gls{YMR} system are listed in table \ref{tab:ie}.
-
 \begin{table}[h]
     \centering
 %   \scalebox{0.86}{
-        \begin{tabular}{ccc}
+        \begin{tabularx}{\linewidth}{mbb}
             \hline
             \textbf{Initiating Event} & \textbf{Reason} & \textbf{Difficulty to Model} \\ \hline
-            Volcanic Activity & Repository rupture and Large Heat Influx & Rare event and needs modeling of physical phenomena \\ 
-            Canister Corrodes Away & Leakage of Radioactive material & Modeling corrosion in geological time periods \\
-            Seismic Activity & Repository rupture & Rare event and difficult to predict \\ \hline
-        \end{tabular}
+            \small{Volcanic Activity} & Repository rupture and Large Heat Influx & Rare event and needs modeling of physical phenomena \cite{marzocchi_quantifying_2004} \\ 
+            \small{Canister Corrosion} & Leakage of Radioactive material & Modeling corrosion in geological time periods \cite{sadiq_probabilistic_2004, oldenburg_low-probability_2016} \\
+            \small{Seismic Activity} & Repository rupture & Rare event and difficult to predict \cite{ward_multidisciplinary_1994} \\ \hline
+        \end{tabularx}
         \caption{List of initiating events crucial to the failure of the \gls{YMR}}
         \label{tab:ie}
 \end {table}
 
 The three initiating events all have very little data
-and cannot have empirical data for modeling. Thus,
+and cannot have empirical data to quantify their probabilities. Thus,
 various methods have been used in an attempt to model these events.
 
 \section{Goal}
@@ -222,9 +195,6 @@ The goal of this project is to research a method for effectively
 modeling the three initiating events through literature review.
 Preferably a value judgment will be made on the best method
 for modeling the initiating event. 
-
-\FloatBarrier
-
 
 
 \section{Volcanic Activity}
@@ -248,27 +218,27 @@ a simple Poisson model:
 
 This model assumed three things:
 
-\begin{itemize}
-    \item 1. Volcanic eruptions in successive time periods are independent
+\begin{enumerate}
+    \item Volcanic eruptions in successive time periods are independent
      and should follow Poisson distribution with constant mean\\
-    \item 2. Every eruption has the same probability to disrupt the repository \\
-    \item 3. Disruption events are independent \\
-\end{itemize}
+    \item Every eruption has the same probability to disrupt the repository \\
+    \item Disruption events are independent \\
+\end{enumerate}
 
 This model, using a refined mathematical model, resulted in a 
 probability of volcanic disruption of the repository in the range of 
-3.3e-10 to 4.7e-8 for the first year, with a linear increase with time \cite{crowe_volcanic_1986}.
+\textbf{3.3e-10 to 4.7e-8} for the first year, with a linear increase with time \cite{crowe_volcanic_1986}.
 
-Though a brave feat, the poisson model was not an adequate model for 
+Though a brave feat, the Poisson model was not an adequate model for 
 measuring a complex phenomenon like a volcanic eruption. The reasons
 are the following:
 
-\begin{itemize}
-    \item 1. A simple Poisson model has a constant rate, which should be changing in time. Volcanic
+\begin{enumerate}
+    \item A simple Poisson model has a constant rate, which should be changing in time. Volcanic
             activities are considered "waning", "random", and "developing" in time \cite{ho_nonhomogeneous_1991}, meaning
             that the rate ($\lambda$) changes over time. 
-    \item 2. Clear understanding is needed of eruptive processes and reliable dating techniques.
-\end{itemize}
+    \item Clear understanding is needed of eruptive processes and reliable dating techniques.
+\end{enumerate}
 
 
 \subsection{Non-homogeneous Poisson Method}
@@ -309,16 +279,13 @@ This non-homogeneous Poisson method with updated eruption rate is to take into a
 specific physical events or processes that cause volcanic eruptions ($\lambda(t)$), and the 
 various factors with random influences (Simple Poisson).
 
-\begin{wrapfigure}{r}{0.4\textwidth}
+\begin{figure}[h]
 \centering
+\includegraphics[scale=0.3]{./images/map.png}
 \caption{This map outlines the are of most recent volcanic activity (dashed line)
 and high-risk zones (rectangles). The dark shape labeled YM is the repository.}
-
-\includegraphics[scale=0.3]{./images/map.png}
-\vspace{-10pt}
 \label{fig:map}
-
-\end{wrapfigure}
+\end{figure}
 
 
 For the probability of the volcanic eruption disrupting the repository, a map is drawn
@@ -330,7 +297,7 @@ for the upper limit for the probability.
 The non-homogeneous Poisson method included various physical events and historic eruptions
 into its risk calculation, as well as reflect the randomness of volcanic eruptions.
 This resulted in a 90\% confidence interval for the probability of `site disruption'
-of 0.01 to 0.067 for 10,000 years \cite{ho_risk_1992}.
+of \textbf{0.01 to 0.067 for 10,000} years \cite{ho_risk_1992}.
 
 \subsection{Multiple non-homogeneous Poisson models}
 Connor et al. proposed a three non-homogeneous Poisson model
@@ -351,9 +318,9 @@ of this review.
 
 In short, this more detailed model takes into account the 
 clustering of Quaternary volcanoes and the spatial dependency
-or volcanic recurrence. This model resulted in a probability
+or volcanic recurrence. This model resulted in a \textbf{ probability
 of disruption within the 8 square kilometers of the repository
-between 0.0001 and 0.0005 in 10,000 years \cite{connor_three_1995}.
+between 0.0001 and 0.0005 in 10,000 years} \cite{connor_three_1995}.
 
 
 \subsection{Discussion}
@@ -375,10 +342,226 @@ in 10,000 years. However, such as feat would cost tremendous resources,
 which would call for estimates and assumptions.  
 
 
+
+\section{Canister Failure}
+Canister failure is another modeling issue in nuclear repositories.
+The science of corrosion and crack is well understood, but it is impossible
+to run an experiment on a corrosion behavior for 100,000 years.
+There have been various attempts to model this behavior and to measure
+the probability of a canister failing. Depending on the
+agency that performs these studies important material parameters, such
+as pressure, temperature and atmosphere humidity differ. Thus, the main focus
+of this section is on the method failure modeling and probability calculation.
+
+\subsection{Empirical Correlation with Monte Carlo Simulation for Canister Corrosion}
+To obtain a probability distribution function for the failure of a single
+canister, the Sagar et al used a combination of empirical correlation
+with Monte Carlo Simulation \cite{sagar_probabilistic_1986}.
+Different empirical equations for discrete temperature regimes for 
+small samples of material that was corroded for six weeks. The coefficients
+of the equation are set as random variables with a normal distribution.
+A Monte Carlo simulation is run to obtain the probability density
+function for the failure probability of a container (result displayed in
+figure \ref{fig:can}). Since the coefficient follows a normal distribution,
+the probability density also resembles a normal distribution.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{./images/canister.png}
+\label{fig:can}
+\caption{Result of canister failure derived from Monte Carlo Simulation
+         with empirical data.}
+\end{figure}
+
+
+\subsection{Material Testing with Monte Carlo Simulation for Canister Break}
+The Swedish radioactive waste management company, or \gls{SKB}, 
+performed extensive material testing with Monte Carlo method
+to calculate the probability of canister failure. They performed
+tensile test, compression tests, fracture mechanics tests as well 
+as studied the microstructure of the canister material to obtain
+the correlation of canister damage and defect. Using the data 
+obtained from the experiments, they ran Monte Carlo simulations
+on the failure probability given their geometry and pressure, to
+obtain the probability of initiation of crack growth. 
+
+\subsection{Discussion}
+Canister failure, unlike volcanic activity, is a scientifically well
+known and predictable event. The only difficulty lies on the 
+uncertainty stemming from the long time period. Since it is unable
+to perform thousand-year-long tests, most agencies use a combination
+of shorter-term empirical measurement combined with a Monte-Carlo 
+simulation to extend that correlation to a further future. However,
+there are assumptions that the surrounding environment (pressure, humidty etc.)
+will remain the same. An improvement can be made in which the surrounding environment
+variables could be a distribution (or an equation with time, if possible)
+that then creates a sample that the Monte Carlo simulation samples from.
+
 \FloatBarrier
 
 
-\pagebreak
+\section{Seismic Activity}
+
+Seismic activity, similar to volcanic activity, is an initiating event
+in the repository system that is difficult to model accurately. However,
+earthquakes are more predictable than volcanic activities and can be 
+analyzed in higher resolution. The discipline is well studied and 
+established, and is called \gls{PSHA}.
+The result of a \gls{PSHA} is the frequency of a seismic activity above
+a certain threshold, or ``The rate of exceeding various ground-motion
+levels at a site.'' \cite{thenhaus_seismic_2003}
+ The \gls{PSHA} mostly takes the form of studying signs of seismic activity,
+along with expert interpretation.
+For example, Stepp et al. \cite{stepp_probabilistic_2001} studied the following categories
+to predict earthquake probability in the Yucca Mountain region:
+\begin{itemize}
+    \item Faults within 100 km for Quaternary activity
+    \item History and characteristics of past earthquake displacements  
+    \item Contemporary earthquake activity
+    \item Recorded earthquakes in the region
+    \item Ground motion attnuation relationships
+    \item Numerical modeling of ground motions from scenarios
+\end{itemize}
+
+The \gls{PSHA} is a combination of 
+calculating the aleatory (random) uncertainty in
+earthquake occurrence and the epistemic uncertainty
+about the seismotectonic environment of a site.
+
+\subsection{Aleatory Uncertainty in Earthquake Occurrence}
+
+From the pioneering studies on \gls{PSHA} by \cite{mcguire_fortran_1976}
+and \cite{cornell_engineering_1968}, the method for \gls{PSHA} 
+is well-documented. First, the following inputs are obtained to calculate
+the mean frequency of ground motion:
+
+\begin{itemize}
+    \item Seismic sources that contribute to site hazard 
+    (probability distributions of distances of earthquake from site)
+    \item Earthquake recurrence for each source 
+    (mean annual rate of occurrence and magnitude distribution)
+    \item Ground motion attenuation for region
+\end{itemize}
+
+
+The hazard calculation method integrates over the variables
+to obtain the frequency of the earthquake. The hazard curve
+is associated to each site. Each computed seismic hazard curve then
+is combined into a logic tree, where each pathway is a conditional
+probability of all the branches along the way. Thus, the result
+is a family of hazard curves, with weights associated to each curve.
+
+
+
+\subsection{Epistemic Uncertainty in Earthquake Occurrence}
+
+Epistemic uncertainty was evaluated by a group of experts
+who characterized seismic sources, fault displacement potentials
+and ground motion attenuation in the region. The process 
+was done with expert elicitation involving workshops,
+consensus identification, and sharing of data and information.
+
+
+\subsection{Summary and Discussion}
+Many complex components go into the computation of 
+seismic activity probability. The majority is the study
+of geological survey and fault identification that allows
+experts to determine the probability of a seismic activity.
+The various parameters and expert interpretations are 
+represented to a hazard curve, which is then collaborated
+to a logic tree to find the probability of seismic activity
+at the site of interest.
+The validity (or the integrity) of the resulting frequency 
+depends heavily on the thoroughness of the input parameters
+and the expert interpretations. It is calculated in \cite{stepp_probabilistic_2001}
+that the frequency for the \gls{YMR} site is $10^{-4}$/yr.
+
+
+
+\section{Conclusion}
+
+This paper lists the results of extensive literature
+review on quantifying the frequency of seismic activity,
+volcanic eruption, and canister failure in the \gls{YMR}.
+For volcanic activity, the modeling improved by doing more
+complex and multi-dimensional Poisson methods. For canister
+failure, empirical correlations for short times are combined
+with Monte-Carlo simulations to extrapolate to the far future.
+For seismic activity, an already well-established \gls{PSHA}
+combined analysis of potential seismic sources and historical
+seismic activity data to model future seismic activity.
+
+
+\section{Appendix - Reviewer Comments and Resolution}
+The appendix includes comments from reviewers of the previously
+submitted extended abstract.
+
+\subsection{Reviewer 1 Comments and Resolution}
+
+\textbf{Comments:}
+
+\begin{center}
+    \begin{varwidth}{0.8\textwidth}
+
+`` The methods section is too broad – it states that initiating events that cannot be modeled are picked, however, seismic PRA methods have been developed for IEs of earthquakes. Exploration of volcanic IE is very interesting, this would be a neat topic for review. The ‘system analysis’ mentioned is also very vague, what is the system analysis method? It seems that the system analysis should result in a ranking? How can this ranking be connected to risk results? ''
+    \end{varwidth}
+\end{center}
+
+
+\noindent \textbf{Resolution:}
+
+The method section has been clarified to clearly define what will be
+covered (probability/frequency quantification of three initiating events)
+and how they will be covered (extensive literature review.)
+
+For the system analysis, modifications are made to clarify the process
+of how the author reached the conclusion of picking the three initiating 
+events given the system under analysis. It follows a logic where various
+\gls{YMR} reports and analyses are studied, and the author made a judgment
+based on the reports that the three events were the most prevalent issues
+in repository failure.
+
+\subsection{Reviewer 2 Comments and Resolution:}
+
+
+\textbf{Comments:}
+\begin{center}
+    \begin{varwidth}{0.8\textwidth}
+
+
+`` 1) The term "modeling" needs to be clearly defined. When saying "Initiating Event (IE) analysis" in Probabilistic Risk Assessment (PRA), we usually refer to two aspects: IE Identification, and IE Quantification. In the final paper, please clarify the scope of “modeling” in this study; (2) Also, the word "system failure" (mentioned in Section 6) needs to be clarified. According to the contents under Section 6, it seems that an "end state" is defined as a combination of initiating event and system failure. For example, an earthquake (initiating event) occurs and leads to a crack in the cask (system failure), hence the radioactive material escapes from the cask to the environment (end state). Please provide this type of clarification in the final paper.''
+
+    \end{varwidth}
+\end{center}
+
+\noindent \textbf{Resolution:}
+
+1) A sentence was added saying the word `modeling' in this report refers to 
+initiating event quantification, not identification. Identification
+of the initiating events are already done by the author in the 
+`system analysis' section.
+
+2) The flexibility of the word `system failure', depending on the 
+scope of the system,  is mentioned in the section defining system failure.
+
+\subsection{Reviewer 3 Comments and Resolution:}
+
+\textbf{Comments:}
+\begin{center}
+    \begin{varwidth}{0.8\textwidth}
+
+``The topic is relevant to the PRA course. The level of sufficiency would depend on how much literature review is done for this work (e.g., number of references to be analyzed), as apparently the author does not include quantitative PRA analysis (e.g., event tree, fault tree) in the schedule. In the final paper, it is suggested that difficulties in modeling the initiating events of interest be justified by elaborating the literature review to find out what the challenges are and reasons for those challenges. Table 1 given in the extended abstract needs to be justified (and acknowledged) by adding references from different domains, not just from the nuclear industry. ''
+
+    \end{varwidth}
+\end{center}
+
+\noindent \textbf{Resolution:}
+
+Other papers from other domains are reviewed and added in the paper
+as citations next to Table 1.
+
+
+\pagebreak 
 
 
 
