@@ -64,29 +64,25 @@
 
 \section{Abstract}
 \gls{UNF} repositories, given the high decay heat and radioactivity
-of \glspl{UNF}, requires careful engineering. The current plan is
+of \glspl{UNF} and its geological lifetime, requires careful engineering. The current plan is
 to design a repository that would contain the material for one million years.
-Considering various events (failures) can occur in that time range,
+Considering various events (failures) can take place in that time range,
 the \gls{UNF} repository proposes an interesting subject for
 \gls{PRA}. In this report, the model repository design is after the 
 \gls{YMR}, which is a mined repository in volcanic tuff.
-Ultimate failure status can be defined in various ways, depending on the
-extent of leakage during the one million years (leakage from canister
-\textasciitilde exposure to nearest population).
 A definitive exposure of failure criteria must be defined,
 in order for a reasonable analysis.  
 
 Given the expansive
-time range, very little real data is available.
-Major issues or potential failures of the \gls{YMR} include volcanic activity
-and canister failure. The two events have an extremely low
-probability, but have catastrophic consequences. Considering that
+time range and the unlikely of events, very little real data is obtainable.
+Major issues or potential failures of the \gls{YMR} include volcanic activity, seismic activity,
+and canister failure. The events have extremely low
+probabilities, but have catastrophic consequences. Considering that
 risk is a function of both frequency and severity, the risk 
 of the two factors is significant. Thus there is a necessity
-to model the initiating events using non-traditional
-risk analysis methods.
+to model the initiating events.
 
-This project summarizes literature on methods of modeling
+This project summarizes literature on methods of modeling the 
 three initiating events of \gls{YMR}, and identifies
 benefits and limitations of the methods. To clarify,
 the word `modeling' in this report refers to initiating event
@@ -100,7 +96,7 @@ and using a homogeneous Poisson process \cite{ho_risk_1992}.
 
 
 \section{Background}
-\gls{YMR} has been studied thoroughly in hopes of finally
+The \gls{YMR} has been studied thoroughly in hopes of finally
 disposing the U.S. \gls{UNF} inventory. However, considering
 that it is a large project involving highly radioactive material,
 careful planning and analyses must be done. The reference design
@@ -115,8 +111,9 @@ on operation and failure probabilities.
 
 However, certain events are identified to be extremely difficult
 to model using traditional risk analysis models. The events either
-contain geological timescales or unpredictable natural disasters.
-These events call for non-traditional methods of risk analysis.
+contain geological timescales or are unpredictable natural disasters.
+These events call for non-traditional methods of risk analysis, or a hybrid
+method to quantify the probability of the initiating events.
 
 
 \section{Literature Review}
@@ -141,8 +138,8 @@ to rank important parameters are suggested in \cite{mohanty_cdf_2001}.
 
 Literature review will be done to study the methods of analyzing the three
 initiating events - volcanic eruption, seismic activity and canister
-corrosion. Studying the previous methods will bring insight into how
-the initiating event works and how it affects the system of
+failure. Studying the previous methods will bring insight into 
+the mechanism of the initiating event and how it affects the system of
 interest (the repository). With the knowledge, limitations of
 current methods and possible improvements are discussed.
 
@@ -151,14 +148,14 @@ The definition of system failure depends on the scope of the system.
 If the system is considered to be the entire repository, the `system failure' would be
 `Radioactive Material Escape from Container.'
 `Radioactive Material' would namely mean the spent fuel assemblies.
-The container could be the transport cask which transports the assemblies from
-the reactors to the site, or the emplacement cask, which is ultimately put in the repository.
+The container is the emplacement cask, which is ultimately put in the repository.
 
 
 \section{Definition of Initiating Event}
-An initiating event is what causes a cascade of events that eventually leads
+An initiating event is an event that causes a cascade of events that eventually leads
 to the system failure, which is defined above as `Radioactive Material Escape
-from Container'. 
+from Container'.  For example, an earthquake would cause repository eruption, which 
+causes canister cracking, which would cause radioactive material release.  
 
 
 \section{System Analysis}
@@ -179,7 +176,7 @@ Initiating events have been identified as crucial to the
             \hline
             \textbf{Initiating Event} & \textbf{Reason} & \textbf{Difficulty to Model} \\ \hline
             \small{Volcanic Activity} & Repository rupture and Large Heat Influx & Rare event and needs modeling of physical phenomena \cite{marzocchi_quantifying_2004} \\ 
-            \small{Canister Corrosion} & Leakage of Radioactive material & Modeling corrosion in geological time periods \cite{sadiqp_robabilistic_2004, oldenburg_low-probability_2016} \\
+            \small{Canister Corrosion} & Leakage of Radioactive material & Modeling corrosion in geological time periods \cite{sadiq_probabilistic_2004, oldenburg_low-probability_2016} \\
             \small{Seismic Activity} & Repository rupture & Rare event and difficult to predict \cite{ward_multidisciplinary_1994} \\ \hline
         \end{tabularx}
         \caption{List of initiating events crucial to the failure of the \gls{YMR}}
@@ -191,8 +188,8 @@ and cannot have empirical data to quantify their probabilities. Thus,
 various methods have been used in an attempt to model these events.
 
 \section{Goal}
-The goal of this project is to research a method for effectively
-modeling the three initiating events through literature review.
+The goal of this project is to identify methods for effectively
+modeling the three initiating events through extensive literature review.
 Preferably a value judgment will be made on the best method
 for modeling the initiating event. 
 
@@ -384,6 +381,17 @@ the correlation of canister damage and defect. Using the data
 obtained from the experiments, they ran Monte Carlo simulations
 on the failure probability given their geometry and pressure, to
 obtain the probability of initiation of crack growth. 
+
+\subsection{Uncertainty Analysis}
+
+As mentioned above, various parameters in the corrosion experiments
+are different from agency to agency due to their different repository 
+types. Also, there is an aleatory uncertainty in the repository over 
+thousands of years of the repository environment. Experiments and 
+uncertainty analysis have been done where the environmental
+conditions ( water chemistry, temperature) are varied along with
+empirical process parameters to calculate the probability depending 
+on the variables \cite{sutcliffe_uncertainty_1984}.
 
 \subsection{Discussion}
 Canister failure, unlike volcanic activity, is a scientifically well
